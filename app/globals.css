@@ -1,0 +1,513 @@
+@import '@fontsource/ibm-plex-sans-arabic/400.css';
+@import '@fontsource/readex-pro/400.css';
+@import '@fontsource/readex-pro/700.css';
+@import '@fontsource/alexandria/700.css';
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('/Cairo-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg: #FCF5ED;
+  --panel: #ffffff;
+  --muted: #705331;
+  --line: #E5E3B2;
+  --matcha: #91A560;
+  --olive: #6B8136;
+  --bean: #705331;
+  --gold: #D9B46E;
+  --charcoal: #232122;
+  --focus-ring: rgba(107, 129, 54, 0.35);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
+}
+
+body {
+  @apply bg-[#FCF5ED] text-[#232122] antialiased;
+  min-width: 320px;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  text-rendering: optimizeLegibility;
+  background-image:
+    radial-gradient(ellipse at 8% 4%, rgba(229, 227, 178, 0.34), transparent 28rem),
+    radial-gradient(ellipse at 92% 22%, rgba(217, 180, 110, 0.14), transparent 26rem);
+}
+
+@media (max-width: 639px) {
+  body:has(.customer-ordering-page) > footer {
+    padding-bottom: max(5rem, calc(4rem + env(safe-area-inset-bottom)));
+  }
+}
+
+::selection {
+  background: rgba(145, 165, 96, 0.3);
+  color: #232122;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Alexandria', 'Readex Pro', sans-serif;
+}
+
+.brand-name {
+  font-family: 'Alexandria', 'Readex Pro', sans-serif;
+  font-weight: 700;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+input, textarea, select {
+  @apply rounded-xl border border-[#E5E3B2] bg-white px-3 py-2 outline-none transition-colors focus:border-matcha-500;
+}
+
+input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.category-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #E5E3B2 transparent;
+  scroll-padding-inline: 0.5rem;
+}
+
+.category-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.category-scroll::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: #E5E3B2;
+}
+
+.motion-enter {
+  animation: rise-in 480ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.motion-fill-both {
+  animation-fill-mode: both;
+}
+
+.motion-float {
+  animation: slow-float 8s ease-in-out infinite;
+}
+
+.logo-splash {
+  display: grid;
+  min-height: 100svh;
+  width: 100%;
+  place-items: center;
+  overflow: hidden;
+  padding: 2rem 1rem;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(229, 227, 178, .56), transparent 22rem),
+    #FCF5ED;
+}
+
+.logo-splash__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.logo-splash__mark {
+  position: relative;
+  width: min(62vw, 15rem);
+  aspect-ratio: 1;
+  filter: drop-shadow(0 16px 24px rgba(48, 54, 37, .1));
+}
+
+.logo-splash__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  clip-path: circle(75% at 50% 50%);
+  opacity: 0;
+  transform: scale(.72);
+  filter: blur(6px);
+  animation: splash-logo-pop 700ms 420ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.logo-splash__outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: rotate(-90deg);
+}
+
+.logo-splash__outline-path {
+  fill: none;
+  stroke: #6B8136;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 723;
+  stroke-dashoffset: 723;
+  animation: splash-logo-outline 950ms 120ms cubic-bezier(.45, 0, .15, 1) both;
+}
+
+.logo-splash__outline-arc {
+  fill: none;
+  stroke: #91A560;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 120 672;
+  stroke-dashoffset: 792;
+  opacity: .55;
+  animation: splash-logo-outline 950ms 120ms cubic-bezier(.45, 0, .15, 1) both, splash-arc-spin 7s 1.2s linear infinite;
+  transform-origin: center;
+}
+
+.logo-splash__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  color: #705331;
+  font-size: .9rem;
+  animation: splash-copy-enter 420ms 760ms ease-out both;
+}
+
+.logo-splash__copy .brand-name {
+  color: #6B8136;
+  font-size: .8rem;
+  letter-spacing: .16em;
+}
+
+.logo-splash__progress {
+  width: 5rem;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: rgba(107, 129, 54, .16);
+}
+
+.logo-splash__progress span {
+  display: block;
+  width: 40%;
+  height: 100%;
+  border-radius: inherit;
+  background: #6B8136;
+  animation: splash-progress 900ms ease-in-out infinite;
+}
+
+.login-cup {
+  filter: drop-shadow(0 24px 30px rgba(48, 54, 37, .12));
+}
+
+.login-cup-body {
+  position: absolute;
+  z-index: 0;
+  inset: 17px 14px 28px;
+  border: 1px solid rgba(255, 255, 255, .9);
+  border-radius: 2rem 2rem 2.5rem 2.5rem;
+  background: linear-gradient(180deg, #fffefa 0%, #fff 72%, #f7f0e5 100%);
+  clip-path: polygon(0 0, 100% 0, 99% 94%, 97% 100%, 3% 100%, 1% 94%);
+  box-shadow: inset 0 0 0 1px rgba(210, 193, 166, .18);
+}
+
+.login-cup-handle {
+  position: absolute;
+  z-index: -1;
+  top: 34%;
+  right: 3px;
+  width: 64px;
+  height: 112px;
+  border: 11px solid #c99a67;
+  border-left: 0;
+  border-radius: 0 52% 52% 0;
+  background: linear-gradient(90deg, transparent 45%, rgba(201, 154, 103, .12));
+}
+
+.login-cup-rim {
+  position: absolute;
+  z-index: 20;
+  top: 9px;
+  right: 34px;
+  left: 34px;
+  height: 22px;
+  border: 3px solid #d9c4a4;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #f8edda 0%, #fffdfa 75%);
+  box-shadow: 0 3px 5px rgba(83, 64, 42, .08);
+}
+
+.login-cup-saucer {
+  position: absolute;
+  right: 24%;
+  bottom: 4px;
+  left: 24%;
+  height: 22px;
+  border: 3px solid #c8a77a;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .75), rgba(239, 226, 205, .85));
+  box-shadow: 0 5px 8px rgba(83, 64, 42, .09);
+}
+
+.hero-writing-word {
+  display: inline-block;
+  animation: hero-word-write 420ms steps(5, end) both;
+}
+
+.hero-writing-word:not(:last-child) {
+  margin-inline-end: .22em;
+}
+
+.hero-coffee-cup {
+  animation: coffee-cup-float 3.8s ease-in-out infinite;
+}
+
+.coffee-steam {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: coffee-steam-rise 2.1s ease-out infinite;
+}
+
+.coffee-steam-two {
+  animation-delay: 700ms;
+}
+
+.coffee-steam-three {
+  animation-delay: 1400ms;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-word-write {
+  from {
+    clip-path: inset(0 0 0 100%);
+    opacity: .3;
+    transform: translateY(3px);
+  }
+  to {
+    clip-path: inset(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes coffee-cup-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes coffee-steam-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(7px) scale(.8);
+  }
+  30% {
+    opacity: .75;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(1.1);
+  }
+}
+
+@keyframes slow-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-10px, 12px, 0);
+  }
+}
+
+@keyframes splash-logo-pop {
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes splash-arc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes splash-logo-outline {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes splash-copy-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes splash-progress {
+  from {
+    transform: translateX(250%);
+  }
+  to {
+    transform: translateX(-250%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero-coffee-cup,
+  .coffee-steam,
+  .logo-splash__image,
+  .logo-splash__outline-path,
+  .logo-splash__outline-arc,
+  .logo-splash__copy,
+  .logo-splash__progress span {
+    animation: none;
+  }
+
+  .logo-splash__image {
+    clip-path: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .logo-splash__outline-path,
+  .logo-splash__outline-arc {
+    stroke-dashoffset: 0;
+  }
+
+  .logo-splash__copy {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.card {
+  @apply rounded-2xl border border-[#e2e0d2] bg-white shadow-soft;
+}
+
+.badge {
+  @apply inline-flex items-center rounded-full px-2 py-1 text-[10px] font-semibold;
+}
+
+.receipt-rule {
+  border-top: 1px dashed #705331;
+}
+
+.receipt {
+  font-family: 'Cairo', sans-serif;
+  font-synthesis: weight;
+}
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  .print-shell,
+  .print-shell * {
+    visibility: visible !important;
+  }
+
+  .print-shell {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  .print-shell > div {
+    display: block !important;
+    max-height: none !important;
+    max-width: none !important;
+    overflow: visible !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .print-shell > div > :not(:nth-child(3)) {
+    display: none !important;
+  }
+
+  .print-shell > div > :nth-child(3) {
+    display: block !important;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  .receipt {
+    width: 80mm;
+    margin: 0 auto;
+    padding: 3mm;
+    color: #000;
+    font-family: 'Cairo', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.65;
+    text-rendering: auto;
+  }
+
+  .receipt [class~="text-[10px]"] {
+    font-size: 11px !important;
+    line-height: 1.55;
+  }
+
+  .receipt-58 {
+    width: 58mm;
+  }
+
+  .receipt-shift {
+    width: 80mm;
+    text-align: right;
+  }
+
+  @page {
+    margin: 0;
+  }
+}
